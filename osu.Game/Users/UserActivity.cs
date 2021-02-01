@@ -33,13 +33,15 @@ namespace osu.Game.Users
         public class InMvis : UserActivity
         {
             public BeatmapInfo Beatmap { get; }
+            public bool Unicode { get; }
 
-            public InMvis(BeatmapInfo info)
+            public InMvis(BeatmapInfo info, bool useUnicode)
             {
                 Beatmap = info;
+                Unicode = useUnicode;
             }
 
-            public override string Status => "正在听歌";
+            public override string Status => $@"正在听 {(Unicode ? Beatmap.BeatmapSet.Metadata.TitleUnicode : Beatmap.BeatmapSet.Metadata.Title)} - {(Unicode ? Beatmap.BeatmapSet.Metadata.ArtistUnicode : Beatmap.BeatmapSet.Metadata.Artist)}";
         }
 
         public class Editing : UserActivity
